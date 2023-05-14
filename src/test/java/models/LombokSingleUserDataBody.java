@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LombokSingleUserData {
+public class LombokSingleUserDataBody {
     @JsonProperty("data")
     private PojoSingleUserData user;
 }

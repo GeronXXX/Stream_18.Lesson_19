@@ -1,7 +1,7 @@
 package stream18;
 
-import models.LombokCreateUserData;
-import models.LombokSingleUserData;
+import models.LombokCreateUserDataResponse;
+import models.LombokSingleUserDataBody;
 import models.PojoCreateUserDataBody;
 import org.junit.jupiter.api.Test;
 
@@ -16,16 +16,16 @@ import static user_data.FakerTestDate.firstName;
 import static user_data.FakerTestDate.jobFaker;
 
 
-public class ReqresTest {
+public class  ReqresTest {
     @Test
     void checkSingleUserId() {
-        LombokSingleUserData response = given(reqresRequestSpec)
+        LombokSingleUserDataBody response = given(reqresRequestSpec)
                 .when()
                 .get("users/2")
                 .then()
                 .spec(reqresResponseSpec)
                 .statusCode(200)
-                .extract().as(LombokSingleUserData.class);
+                .extract().as(LombokSingleUserDataBody.class);
 
         assertEquals(2, response.getUser().getId());
         assertEquals("janet.weaver@reqres.in", response.getUser().getEmail());
@@ -61,14 +61,14 @@ public class ReqresTest {
         body.setName(firstName);
         body.setJob(jobFaker);
 
-        LombokCreateUserData response = given(reqresRequestSpec)
+        LombokCreateUserDataResponse response = given(reqresRequestSpec)
                 .body(body)
                 .when()
                 .post("/users")
                 .then()
                 .spec(reqresResponseSpec)
                 .statusCode(201)
-                .extract().as(LombokCreateUserData.class);
+                .extract().as(LombokCreateUserDataResponse.class);
 
         assertThat(response.getName()).isEqualTo(firstName);
         assertThat(response.getJob()).isEqualTo(jobFaker);
