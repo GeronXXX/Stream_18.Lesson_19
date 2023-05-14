@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PojoCreateUserDataBody {
-    String name, job;
-
+public class CreateUserDataResponse {
+    String name, job, createdAt;
+    Integer id;
 }

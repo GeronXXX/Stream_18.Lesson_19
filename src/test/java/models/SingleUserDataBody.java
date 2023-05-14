@@ -1,11 +1,13 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LombokCreateUserDataResponse {
-    String name, job, createdAt;
-    Integer id;
+public class SingleUserDataBody {
+    @JsonProperty("data")
+    private SingleUserData user;
 }
+

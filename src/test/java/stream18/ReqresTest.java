@@ -1,10 +1,9 @@
 package stream18;
 
-import models.LombokCreateUserDataResponse;
-import models.LombokSingleUserDataBody;
-import models.PojoCreateUserDataBody;
+import models.*;
 import org.junit.jupiter.api.Test;
 
+import static data_faker.FakerTestDate.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -12,34 +11,38 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.ReqresSpec.reqresRequestSpec;
 import static specs.ReqresSpec.reqresResponseSpec;
-import static user_data.FakerTestDate.firstName;
-import static user_data.FakerTestDate.jobFaker;
 
 
 public class  ReqresTest {
     @Test
     void checkSingleUserId() {
-        LombokSingleUserDataBody response = given(reqresRequestSpec)
+        SingleUserDataBody response = given(reqresRequestSpec)
                 .when()
                 .get("users/2")
                 .then()
                 .spec(reqresResponseSpec)
                 .statusCode(200)
-                .extract().as(LombokSingleUserDataBody.class);
+                .extract().as(SingleUserDataBody.class);
 
         assertEquals(2, response.getUser().getId());
         assertEquals("janet.weaver@reqres.in", response.getUser().getEmail());
     }
 
     @Test
-    void checkSingleUserNotFound() {
+    void checkLoginNotPassword() {
+        LoginErrorBody body = new LoginErrorBody();
+        body.setEmail(email);
 
-        given(reqresRequestSpec)
+        LoginErrorResponse response = given(reqresRequestSpec)
+                .body(body)
                 .when()
-                .get("/users/23")
+                .post("/login")
                 .then()
                 .spec(reqresResponseSpec)
-                .statusCode(404);
+                .statusCode(400)
+                .extract().as(LoginErrorResponse.class);
+
+        assertThat(response.getError()).isEqualTo("Missing password");
     }
 
     @Test
@@ -57,22 +60,21 @@ public class  ReqresTest {
     @Test
     void checkCreate() {
 
-        PojoCreateUserDataBody body = new PojoCreateUserDataBody();
+        CreateUserDataBody body = new CreateUserDataBody();
         body.setName(firstName);
         body.setJob(jobFaker);
 
-        LombokCreateUserDataResponse response = given(reqresRequestSpec)
+        CreateUserDataResponse response = given(reqresRequestSpec)
                 .body(body)
                 .when()
                 .post("/users")
                 .then()
                 .spec(reqresResponseSpec)
                 .statusCode(201)
-                .extract().as(LombokCreateUserDataResponse.class);
+                .extract().as(CreateUserDataResponse.class);
 
         assertThat(response.getName()).isEqualTo(firstName);
         assertThat(response.getJob()).isEqualTo(jobFaker);
-
     }
 
     @Test
@@ -84,7 +86,6 @@ public class  ReqresTest {
                 .then()
                 .spec(reqresResponseSpec)
                 .statusCode(204);
-
     }
 
     @Test
