@@ -2,6 +2,7 @@ package stream18;
 
 import models.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static data_faker.FakerTestDate.*;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.ReqresSpec.reqresRequestSpec;
 import static specs.ReqresSpec.reqresResponseSpec;
 
-
+@Tag("api_tests")
 public class  ReqresTest {
     @DisplayName("Проверка данных пользователя id, email и статус код")
     @Test
