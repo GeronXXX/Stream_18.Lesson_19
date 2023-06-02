@@ -17,6 +17,7 @@
 <img width="6%" title="GitHub" src="images/logo/GitHub.svg">
 <img width="6%" title="Jenkins" src="images/logo/Jenkins.svg">
 <img width="8%" title="Lombok" src="images/logo/lombok.svg">
+<img width="6%" title="Groovy" src="images/logo/groovy.svg">
 </p>
 
 Тесты в данном проекте написаны на языке <code>Java</code>, сборщик - <code>Gradle</code>. Так же были использованы фреймворки <code>JUnit 5</code>.
