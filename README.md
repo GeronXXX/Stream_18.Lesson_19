@@ -44,3 +44,7 @@ gradle clean api_tests
 <p align="center">
 <img title="Allure Overview" src="images/screens/allureReportMain.png">
 </p>
+
+<p align="center">
+<img title="Allure Overview" src="images/screens/allureReport.png">
+</p>
