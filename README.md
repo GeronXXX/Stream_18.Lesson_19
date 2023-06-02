@@ -20,7 +20,7 @@
 <img width="8%" title="Groovy" src="images/logo/groovy.svg">
 </p>
 
-Тесты в данном проекте написаны на языке <code>Java</code>, сборщик - <code>Gradle</code>. Так же были использованы фреймворки <code>JUnit 5</code>.
+Тесты в данном проекте написаны на языке <code>Java</code>, сборщик - <code>Gradle</code>. Так же были использованы фреймворк <code>JUnit 5</code>, <code>lombok</code> и <code>groovy</code>.
 Для удаленного запуска реализована джоба в <code>Jenkins</code> с формированием Allure-отчета.
 
 Содержание Allure-отчета:
