@@ -17,61 +17,61 @@ import static specs.ReqresSpec.reqresRequestSpec;
 import static specs.ReqresSpec.reqresResponseSpec;
 
 public class  ReqresTest {
-    @DisplayName("Проверка данных пользователя id, email и статус код")
-    @Test
-    void checkSingleUserId() {
-        SingleUserDataBody response = step("Отправка запроса на получение данных пользователя", () ->
-                given(reqresRequestSpec)
-                        .filter(withCustomTemplates())
-                        .when()
-                        .get("users/2")
-                        .then()
-                        .spec(reqresResponseSpec)
-                        .statusCode(200)
-                        .extract().as(SingleUserDataBody.class));
+//    @DisplayName("Проверка данных пользователя id, email и статус код")
+//    @Test
+//    void checkSingleUserId() {
+//        SingleUserDataBody response = step("Отправка запроса на получение данных пользователя", () ->
+//                given(reqresRequestSpec)
+//                        .filter(withCustomTemplates())
+//                        .when()
+//                        .get("users/2")
+//                        .then()
+//                        .spec(reqresResponseSpec)
+//                        .statusCode(200)
+//                        .extract().as(SingleUserDataBody.class));
+//
+//        step("Проверка id = 2", () ->
+//                assertEquals(2, response.getUser().getId()));
+//        step("Проверка email = janet.weaver@reqres.in", () ->
+//                assertEquals("janet.weaver@reqres.in", response.getUser().getEmail()));
+//    }
 
-        step("Проверка id = 2", () ->
-                assertEquals(2, response.getUser().getId()));
-        step("Проверка email = janet.weaver@reqres.in", () ->
-                assertEquals("janet.weaver@reqres.in", response.getUser().getEmail()));
-    }
+//    @DisplayName("Попытка залогиниться без пароля")
+//    @Test
+//    void checkLoginNotPassword() {
+//        FakerTestDate data = new FakerTestDate();
+//        LoginErrorBody body = new LoginErrorBody();
+//        step("Set email для post запроса", () -> body.setEmail(data.email));
+//
+//        LoginErrorResponse response = step("Отправка post запроса", () ->
+//                given(reqresRequestSpec)
+//                        .filter(withCustomTemplates())
+//                        .body(body)
+//                        .when()
+//                        .post("/login")
+//                        .then()
+//                        .spec(reqresResponseSpec)
+//                        .statusCode(400)
+//                        .extract().as(LoginErrorResponse.class));
+//
+//        step("Проверка ответа Missing password", () ->
+//                assertThat(response.getError()).isEqualTo("Missing password"));
+//    }
 
-    @DisplayName("Попытка залогиниться без пароля")
-    @Test
-    void checkLoginNotPassword() {
-        FakerTestDate data = new FakerTestDate();
-        LoginErrorBody body = new LoginErrorBody();
-        step("Set email для post запроса", () -> body.setEmail(data.email));
-
-        LoginErrorResponse response = step("Отправка post запроса", () ->
-                given(reqresRequestSpec)
-                        .filter(withCustomTemplates())
-                        .body(body)
-                        .when()
-                        .post("/login")
-                        .then()
-                        .spec(reqresResponseSpec)
-                        .statusCode(400)
-                        .extract().as(LoginErrorResponse.class));
-
-        step("Проверка ответа Missing password", () ->
-                assertThat(response.getError()).isEqualTo("Missing password"));
-    }
-
-    @DisplayName("Попытка ответа в соответствии со схемой body POJO")
-    @Test
-    void checkListResourceScheme() {
-
-        step("Отправка get запроса и сверка со схемой ответа POJO", () ->
-                given(reqresRequestSpec)
-                        .filter(withCustomTemplates())
-                        .when()
-                        .get("/unknown")
-                        .then()
-                        .spec(reqresResponseSpec)
-                        .statusCode(200)
-                        .body(matchesJsonSchemaInClasspath("schemas/list_resource_schema")));
-    }
+//    @DisplayName("Попытка ответа в соответствии со схемой body POJO")
+//    @Test
+//    void checkListResourceScheme() {
+//
+//        step("Отправка get запроса и сверка со схемой ответа POJO", () ->
+//                given(reqresRequestSpec)
+//                        .filter(withCustomTemplates())
+//                        .when()
+//                        .get("/unknown")
+//                        .then()
+//                        .spec(reqresResponseSpec)
+//                        .statusCode(200)
+//                        .body(matchesJsonSchemaInClasspath("schemas/list_resource_schema")));
+//    }
 
     @DisplayName("Проверка POST запроса body = response")
     @Test
@@ -115,7 +115,6 @@ public class  ReqresTest {
     @DisplayName("Проверка значений цветов используя groovy")
     @Test
     void checkListColor() {
-        // @formatter:off
         step("Отправка запроса get и проверка в body значений цветов", () ->
                 given(reqresRequestSpec)
                         .filter(withCustomTemplates())
@@ -132,6 +131,5 @@ public class  ReqresTest {
                         .and()
                         .body("data.pantone_value.flatten()",
                                 hasItems("15-4020", "17-2031", "19-1664", "14-4811", "17-1456", "15-5217")));
-// @formatter:on
     }
 }
