@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.ReqresSpec.reqresRequestSpec;
 import static specs.ReqresSpec.reqresResponseSpec;
 
-@Tag("api_tests")
 public class  ReqresTest {
     @DisplayName("Проверка данных пользователя id, email и статус код")
     @Test
