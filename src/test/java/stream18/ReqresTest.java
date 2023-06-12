@@ -1,11 +1,11 @@
 package stream18;
 
+import dataFaker.FakerTestDate;
 import models.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static data_faker.FakerTestDate.*;
 import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -40,8 +40,9 @@ public class  ReqresTest {
     @DisplayName("Попытка залогиниться без пароля")
     @Test
     void checkLoginNotPassword() {
+        FakerTestDate data = new FakerTestDate();
         LoginErrorBody body = new LoginErrorBody();
-        step("Set email для post запроса", () -> body.setEmail(email));
+        step("Set email для post запроса", () -> body.setEmail(data.email));
 
         LoginErrorResponse response = step("Отправка post запроса", () ->
                 given(reqresRequestSpec)
@@ -76,10 +77,10 @@ public class  ReqresTest {
     @DisplayName("Проверка POST запроса body = response")
     @Test
     void checkCreate() {
-
+        FakerTestDate data = new FakerTestDate();
         CreateUserDataBody body = new CreateUserDataBody();
-        step("Set firstName для post запроса", () -> body.setName(firstName));
-        step("Set job для post запроса", () -> body.setJob(jobFaker));
+        step("Set firstName для post запроса", () -> body.setName(data.firstName));
+        step("Set job для post запроса", () -> body.setJob(data.jobFaker));
 
         CreateUserDataResponse response = step("Отправка post запроса", () ->
                 given(reqresRequestSpec)
@@ -93,9 +94,9 @@ public class  ReqresTest {
                         .extract().as(CreateUserDataResponse.class));
 
         step("Сверка firstName в body с firstName в response", () ->
-                assertThat(response.getName()).isEqualTo(firstName));
+                assertThat(response.getName()).isEqualTo(data.firstName));
         step("Сверка job в body с job в response", () ->
-                assertThat(response.getJob()).isEqualTo(jobFaker));
+                assertThat(response.getJob()).isEqualTo(data.jobFaker));
     }
 
     @DisplayName("Проверка DELETE запроса")
