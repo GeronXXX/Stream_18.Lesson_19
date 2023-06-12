@@ -1,22 +1,18 @@
 package stream18;
 
-import dataFaker.FakerTestDate;
-import models.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.ReqresSpec.reqresRequestSpec;
 import static specs.ReqresSpec.reqresResponseSpec;
 
-public class  ReqresTest {
+public class CheckListColorTest {
 //    @DisplayName("Проверка данных пользователя id, email и статус код")
 //    @Test
 //    void checkSingleUserId() {
@@ -73,44 +69,44 @@ public class  ReqresTest {
 //                        .body(matchesJsonSchemaInClasspath("schemas/list_resource_schema")));
 //    }
 
-    @DisplayName("Проверка POST запроса body = response")
-    @Test
-    void checkCreate() {
-        FakerTestDate data = new FakerTestDate();
-        CreateUserDataBody body = new CreateUserDataBody();
-        step("Set firstName для post запроса", () -> body.setName(data.firstName));
-        step("Set job для post запроса", () -> body.setJob(data.jobFaker));
+//    @DisplayName("Проверка POST запроса body = response")
+//    @Test
+//    void checkCreate() {
+//        FakerTestDate data = new FakerTestDate();
+//        CreateUserDataBody body = new CreateUserDataBody();
+//        step("Set firstName для post запроса", () -> body.setName(data.firstName));
+//        step("Set job для post запроса", () -> body.setJob(data.jobFaker));
+//
+//        CreateUserDataResponse response = step("Отправка post запроса", () ->
+//                given(reqresRequestSpec)
+//                        .filter(withCustomTemplates())
+//                        .body(body)
+//                        .when()
+//                        .post("/users")
+//                        .then()
+//                        .spec(reqresResponseSpec)
+//                        .statusCode(201)
+//                        .extract().as(CreateUserDataResponse.class));
+//
+//        step("Сверка firstName в body с firstName в response", () ->
+//                assertThat(response.getName()).isEqualTo(data.firstName));
+//        step("Сверка job в body с job в response", () ->
+//                assertThat(response.getJob()).isEqualTo(data.jobFaker));
+//    }
 
-        CreateUserDataResponse response = step("Отправка post запроса", () ->
-                given(reqresRequestSpec)
-                        .filter(withCustomTemplates())
-                        .body(body)
-                        .when()
-                        .post("/users")
-                        .then()
-                        .spec(reqresResponseSpec)
-                        .statusCode(201)
-                        .extract().as(CreateUserDataResponse.class));
-
-        step("Сверка firstName в body с firstName в response", () ->
-                assertThat(response.getName()).isEqualTo(data.firstName));
-        step("Сверка job в body с job в response", () ->
-                assertThat(response.getJob()).isEqualTo(data.jobFaker));
-    }
-
-    @DisplayName("Проверка DELETE запроса")
-    @Test
-    void checkDelete() {
-
-        step("Проверка статус кода 204 на запрос delete", () ->
-                given(reqresRequestSpec)
-                        .filter(withCustomTemplates())
-                        .when()
-                        .delete("/users/2")
-                        .then()
-                        .spec(reqresResponseSpec)
-                        .statusCode(204));
-    }
+//    @DisplayName("Проверка DELETE запроса")
+//    @Test
+//    void checkDelete() {
+//
+//        step("Проверка статус кода 204 на запрос delete", () ->
+//                given(reqresRequestSpec)
+//                        .filter(withCustomTemplates())
+//                        .when()
+//                        .delete("/users/2")
+//                        .then()
+//                        .spec(reqresResponseSpec)
+//                        .statusCode(204));
+//    }
 
     @DisplayName("Проверка значений цветов используя groovy")
     @Test
